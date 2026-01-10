@@ -21,5 +21,8 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "prettier.prettier-vscode"
+  "editor.defaultFormatter": "prettier.prettier-vscode",
+
+  // 文件图标主题
+  "workbench.iconTheme": "vscode-icons"
 }

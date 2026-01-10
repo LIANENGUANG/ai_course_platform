@@ -86,7 +86,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
+# ===========================
+# Database (数据库配置)
+# ===========================
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
@@ -97,6 +99,13 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '5432'),
+        # PostgreSQL 默认支持时区
+        # 配合 USE_TZ=True，数据库存储 UTC 时间（timestamp with time zone）
+        'OPTIONS': {
+            # 设置数据库连接的时区为 UTC（推荐）
+            # Django 会自动将 UTC 时间转换为 TIME_ZONE 设置的时区
+            'options': '-c timezone=UTC'
+        },
     }
 }
 
@@ -120,15 +129,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
+# ===========================
+# Internationalization (国际化)
+# ===========================
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
+# 语言设置：简体中文
 LANGUAGE_CODE = 'zh-hans'
 
+# 时区设置：中国标准时间 (CST = UTC+8)
+# Django 推荐使用具体的时区名称而非 UTC 偏移量
 TIME_ZONE = 'Asia/Shanghai'
 
+# 启用国际化支持
 USE_I18N = True
 
+# 启用时区支持（Django 强烈推荐）
+# True: 数据库存储 UTC 时间，应用层自动转换为 TIME_ZONE 时区
+# 这是最佳实践，支持未来可能的多时区需求
 USE_TZ = True
 
 
@@ -160,6 +178,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    # 时区配置：日期时间以 ISO 8601 格式返回，包含时区信息
+    # 示例：2024-01-10T14:30:00+08:00 (中国标准时间)
+    'DATETIME_FORMAT': 'iso-8601',
 }
 
 # ===========================
