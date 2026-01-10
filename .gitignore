@@ -38,7 +38,7 @@ ENV/
 .venv
 
 # IDE
-.vscode/
+# .vscode/  # 根目录的 .vscode 配置被跟踪，用于项目级设置
 .idea/
 *.swp
 *.swo

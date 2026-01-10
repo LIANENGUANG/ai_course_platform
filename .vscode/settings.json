@@ -1,0 +1,25 @@
+{
+  // 代理配置
+  "http.proxy": "http://127.0.0.1:7897",
+  "http.proxyStrictSSL": false,
+  "http.proxySupport": "on",
+
+  // 确保代理应用到所有网络请求
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+
+  // 前端文件嵌套配置
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig"
+  },
+
+  // 编辑器保存时操作
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "prettier.prettier-vscode"
+}
