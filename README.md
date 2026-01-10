@@ -10,7 +10,7 @@ Django RESTful API Backend with PostgreSQL
 
 - **后端框架**: Django (Python)
 - **架构模式**: MVC (Model-View-Controller)
-- **数据库**: PostgreSQL 17
+- **数据库**: PostgreSQL 17 (官方 Alpine 镜像)
 - **容器化**: Docker & Docker Compose
 
 ## 本地开发环境
