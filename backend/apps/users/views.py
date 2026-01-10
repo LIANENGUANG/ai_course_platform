@@ -1,5 +1,4 @@
 from rest_framework import status, generics, permissions
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -43,14 +42,19 @@ class RegisterView(generics.CreateAPIView):
         }, status=status.HTTP_201_CREATED)
 
 
-class LoginView(APIView):
+class SessionView(APIView):
     """
-    用户登录
-    POST /api/auth/login/
+    会话管理 (RESTful)
+    POST /api/auth/sessions/ - 创建会话 (登录)
+    DELETE /api/auth/sessions/ - 删除会话 (登出)
     """
-    permission_classes = [permissions.AllowAny]
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
 
     def post(self, request):
+        """登录 - 创建会话"""
         username_or_email = request.data.get('username')
         password = request.data.get('password')
 
@@ -97,15 +101,8 @@ class LoginView(APIView):
             'message': '登录成功'
         }, status=status.HTTP_200_OK)
 
-
-class LogoutView(APIView):
-    """
-    退出登录
-    POST /api/auth/logout/
-    """
-    permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request):
+    def delete(self, request):
+        """登出 - 删除会话"""
         try:
             refresh_token = request.data.get('refresh')
             if refresh_token:
@@ -122,25 +119,20 @@ class LogoutView(APIView):
 
 class CurrentUserView(APIView):
     """
-    获取当前用户信息
-    GET /api/users/me/
+    当前用户资源管理 (RESTful)
+    GET /api/users/me/ - 获取当前用户信息
+    PUT /api/users/me/ - 完整更新用户信息
+    PATCH /api/users/me/ - 部分更新用户信息
     """
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        """获取当前用户信息"""
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
-
-class UpdateUserProfileView(APIView):
-    """
-    更新用户信息
-    PUT /api/users/me/
-    PATCH /api/users/me/
-    """
-    permission_classes = [permissions.IsAuthenticated]
-
     def put(self, request):
+        """完整更新用户信息"""
         serializer = UpdateUserProfileSerializer(
             instance=request.user,
             data=request.data,
@@ -151,12 +143,10 @@ class UpdateUserProfileView(APIView):
 
         # 返回更新后的用户信息
         user_serializer = UserSerializer(user)
-        return Response({
-            'message': '更新成功',
-            'user': user_serializer.data
-        })
+        return Response(user_serializer.data)
 
     def patch(self, request):
+        """部分更新用户信息"""
         serializer = UpdateUserProfileSerializer(
             instance=request.user,
             data=request.data,
@@ -167,20 +157,18 @@ class UpdateUserProfileView(APIView):
 
         # 返回更新后的用户信息
         user_serializer = UserSerializer(user)
-        return Response({
-            'message': '更新成功',
-            'user': user_serializer.data
-        })
+        return Response(user_serializer.data)
 
 
 class ChangePasswordView(APIView):
     """
-    修改密码
-    POST /api/users/me/change-password/
+    修改密码 (RESTful)
+    PUT /api/users/me/password/ - 更新密码
     """
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request):
+    def put(self, request):
+        """更新密码"""
         serializer = ChangePasswordSerializer(
             data=request.data,
             context={'request': request}

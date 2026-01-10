@@ -1,127 +1,50 @@
-import request from '@/utils/request'
+import apiClient from './client';
+import type {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+  ChangePasswordRequest,
+  UpdateProfileRequest,
+  User,
+} from '../utils/types';
 
-// ==================== 类型定义 ====================
+// ============ 认证相关 (RESTful) ============
 
-// 用户档案
-export interface UserProfile {
-  nickname: string
-  avatar: string
-  gender: 'male' | 'female' | 'other' | ''
-  birthday: string | null
-  bio: string
-  role: 'student' | 'teacher' | 'parent' | 'admin'
-  is_profile_completed: boolean
-  created_at: string
-  updated_at: string
-}
+// 登录 - POST /api/auth/sessions/ (创建会话)
+export const login = async (data: LoginRequest): Promise<LoginResponse> => {
+  const response = await apiClient.post<LoginResponse>('/api/auth/sessions/', data);
+  return response.data;
+};
 
-// 学生档案
-export interface StudentProfile {
-  grade: number | null
-  school: string
-  class_name: string
-  parent_phone: string
-}
+// 登出 - DELETE /api/auth/sessions/ (删除会话)
+export const logout = async (refreshToken: string): Promise<void> => {
+  await apiClient.delete('/api/auth/sessions/', {
+    data: { refresh: refreshToken }
+  });
+};
 
-// 用户信息
-export interface User {
-  id: number
-  username: string
-  email: string
-  profile: UserProfile
-  student_profile: StudentProfile | null
-  date_joined: string
-  last_login: string | null
-}
+// ============ 用户相关 (RESTful) ============
 
-// Token 响应
-export interface TokenResponse {
-  access: string
-  refresh: string
-}
+// 注册 - POST /api/users/ (创建用户)
+export const register = async (data: RegisterRequest): Promise<RegisterResponse> => {
+  const response = await apiClient.post<RegisterResponse>('/api/users/', data);
+  return response.data;
+};
 
-// 登录响应
-export interface LoginResponse {
-  user: User
-  tokens: TokenResponse
-  message: string
-}
+// 获取当前用户 - GET /api/users/me/
+export const getCurrentUser = async (): Promise<User> => {
+  const response = await apiClient.get<User>('/api/users/me/');
+  return response.data;
+};
 
-// 注册响应
-export interface RegisterResponse {
-  user: User
-  tokens: TokenResponse
-  message: string
-}
+// 更新个人信息 - PATCH /api/users/me/ (部分更新)
+export const updateProfile = async (data: UpdateProfileRequest): Promise<User> => {
+  const response = await apiClient.patch<User>('/api/users/me/', data);
+  return response.data;
+};
 
-// ==================== 请求参数 ====================
-
-// 登录参数
-export interface LoginParams {
-  username: string  // 支持用户名或邮箱
-  password: string
-}
-
-// 注册参数
-export interface RegisterParams {
-  username: string
-  email: string
-  password: string
-  confirm_password: string
-}
-
-// 更新用户资料参数
-export interface UpdateProfileParams {
-  nickname?: string
-  gender?: 'male' | 'female' | 'other'
-  birthday?: string
-  bio?: string
-  role?: 'student' | 'teacher' | 'parent' | 'admin'
-  grade?: number
-  school?: string
-  class_name?: string
-}
-
-// 修改密码参数
-export interface ChangePasswordParams {
-  old_password: string
-  new_password: string
-  confirm_password: string
-}
-
-// ==================== API 接口 ====================
-
-// 用户注册
-export const register = (data: RegisterParams) => {
-  return request.post<RegisterResponse>('/auth/register/', data)
-}
-
-// 用户登录
-export const login = (data: LoginParams) => {
-  return request.post<LoginResponse>('/auth/login/', data)
-}
-
-// 退出登录
-export const logout = (refresh: string) => {
-  return request.post<{ message: string }>('/auth/logout/', { refresh })
-}
-
-// 刷新 Token
-export const refreshToken = (refresh: string) => {
-  return request.post<TokenResponse>('/auth/refresh/', { refresh })
-}
-
-// 获取当前用户信息
-export const getCurrentUser = () => {
-  return request.get<User>('/users/me/')
-}
-
-// 更新用户资料
-export const updateProfile = (data: UpdateProfileParams) => {
-  return request.patch<{ message: string; user: User }>('/users/me/update/', data)
-}
-
-// 修改密码
-export const changePassword = (data: ChangePasswordParams) => {
-  return request.post<{ message: string }>('/users/me/change-password/', data)
-}
+// 修改密码 - PUT /api/users/me/password/ (更新密码)
+export const changePassword = async (data: ChangePasswordRequest): Promise<void> => {
+  await apiClient.put('/api/users/me/password/', data);
+};

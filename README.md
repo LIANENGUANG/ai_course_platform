@@ -4,7 +4,7 @@
 
 ## 项目概述
 
-这是一个采用前后端分离架构的 AI 课程平台项目，后端使用 Django REST Framework 提供 RESTful API，前端使用 Vue 3 + TypeScript + Vite 构建。
+这是一个采用前后端分离架构的 AI 课程平台项目，后端使用 Django REST Framework 提供 RESTful API，前端使用 React + TypeScript + Ant Design 构建。
 
 ## 技术栈
 
@@ -17,12 +17,12 @@
 - **容器化**: Docker & Docker Compose
 
 ### 前端 (Frontend)
-- **框架**: Vue 3 + TypeScript
-- **构建工具**: Vite
-- **状态管理**: Pinia
-- **路由**: Vue Router
+- **框架**: React 18 + TypeScript
+- **UI 库**: Ant Design (antd)
+- **状态管理**: Zustand
+- **路由**: React Router
 - **HTTP 客户端**: Axios
-- **代码规范**: ESLint + Prettier
+- **构建工具**: Create React App
 
 ## 本地开发环境
 
@@ -113,10 +113,10 @@ cd frontend
 npm install
 
 # 启动开发服务器
-npm run dev
+npm start
 ```
 
-前端将运行在 `http://localhost:5173`
+前端将运行在 `http://localhost:3000`
 
 ### 环境变量
 

@@ -2,24 +2,20 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
     RegisterView,
-    LoginView,
-    LogoutView,
+    SessionView,
     CurrentUserView,
-    UpdateUserProfileView,
     ChangePasswordView,
 )
 
 app_name = 'users'
 
 urlpatterns = [
-    # 认证相关
-    path('auth/register/', RegisterView.as_view(), name='register'),
-    path('auth/login/', LoginView.as_view(), name='login'),
-    path('auth/logout/', LogoutView.as_view(), name='logout'),
-    path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # 认证相关 (RESTful)
+    path('auth/sessions/', SessionView.as_view(), name='session'),  # POST - 创建会话 (登录), DELETE - 删除会话 (登出)
+    path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # POST - 刷新 token
 
-    # 用户信息相关
-    path('users/me/', CurrentUserView.as_view(), name='current_user'),
-    path('users/me/update/', UpdateUserProfileView.as_view(), name='update_profile'),
-    path('users/me/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    # 用户相关 (RESTful)
+    path('users/', RegisterView.as_view(), name='users'),  # POST - 创建用户 (注册)
+    path('users/me/', CurrentUserView.as_view(), name='current_user'),  # GET - 获取, PUT - 完整更新, PATCH - 部分更新
+    path('users/me/password/', ChangePasswordView.as_view(), name='change_password'),  # PUT - 更新密码
 ]
