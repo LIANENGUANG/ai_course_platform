@@ -52,6 +52,13 @@ Thumbs.db
 # Node modules (if using frontend)
 node_modules/
 npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Frontend build output
+dist/
+.nuxt/
+.cache/
 
 # MCP configs with secrets
 mcp-config.json

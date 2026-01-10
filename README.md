@@ -1,17 +1,27 @@
 # AI Course Platform
 
-Django RESTful API Backend with PostgreSQL
+前后端分离的 AI 课程平台
 
 ## 项目概述
 
-这是一个基于 Django 的 RESTful API 后端项目，采用 MVC 模式，使用 PostgreSQL 作为数据库。
+这是一个采用前后端分离架构的 AI 课程平台项目，后端使用 Django REST Framework 提供 RESTful API，前端使用 Vue 3 + TypeScript + Vite 构建。
 
 ## 技术栈
 
-- **后端框架**: Django (Python)
-- **架构模式**: MVC (Model-View-Controller)
+### 后端 (Backend)
+- **框架**: Django 5.1.4 + Django REST Framework 3.15.2
 - **数据库**: PostgreSQL 17 (官方 Alpine 镜像)
+- **认证**: JWT (djangorestframework-simplejwt)
+- **API 文档**: drf-spectacular (Swagger/OpenAPI)
 - **容器化**: Docker & Docker Compose
+
+### 前端 (Frontend)
+- **框架**: Vue 3 + TypeScript
+- **构建工具**: Vite
+- **状态管理**: Pinia
+- **路由**: Vue Router
+- **HTTP 客户端**: Axios
+- **代码规范**: ESLint + Prettier
 
 ## 本地开发环境
 
@@ -33,27 +43,80 @@ Django RESTful API Backend with PostgreSQL
 
 - Docker Desktop
 - Python 3.8+
-- Node.js 16+ (用于 MCP 工具)
+- Node.js 18+
+- npm 或 yarn
 
-### 启动数据库
+### 启动步骤
+
+#### 1. 启动数据库
 
 ```bash
-# 启动 PostgreSQL 数据库
+# 在项目根目录启动 PostgreSQL
 docker-compose up -d
 
-# 停止数据库
-docker-compose down
-
-# 查看数据库日志
-docker-compose logs -f postgres
-
-# 进入数据库命令行
-docker exec -it ai_course_postgres psql -U postgres -d ai_course_platform
+# 检查数据库状态
+docker ps
 ```
+
+#### 2. 启动后端
+
+```bash
+# 进入后端目录
+cd backend
+
+# 激活虚拟环境
+source venv/bin/activate
+
+# 运行数据库迁移
+python manage.py migrate
+
+# 创建超级用户（可选）
+python manage.py createsuperuser
+
+# 启动开发服务器
+python manage.py runserver
+```
+
+后端将运行在 `http://localhost:8000`
+
+**API 文档**:
+- Swagger UI: http://localhost:8000/api/docs/
+- ReDoc: http://localhost:8000/api/redoc/
+- Django Admin: http://localhost:8000/admin/
+
+#### 3. 启动前端
+
+```bash
+# 在新终端窗口，进入前端目录
+cd frontend
+
+# 安装依赖（首次运行）
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+前端将运行在 `http://localhost:5173`
 
 ### 环境变量
 
-项目使用 `.env.local` 文件存储本地开发环境变量（已在 .gitignore 中）。
+**后端 (`backend/.env`)**:
+```bash
+SECRET_KEY=your-secret-key
+DEBUG=True
+DB_NAME=ai_course_platform
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+```
+
+**前端 (`frontend/.env.development`)**:
+```bash
+VITE_APP_TITLE=AI课程平台
+VITE_API_BASE_URL=http://localhost:8000
+```
 
 ## Claude Code MCP Servers
 
@@ -67,15 +130,91 @@ docker exec -it ai_course_postgres psql -U postgres -d ai_course_platform
 
 ```
 ai_course_platform/
-├── docker-compose.yml     # Docker Compose 配置 (PostgreSQL)
-├── .env.local             # 本地环境变量 (不提交到 Git)
+├── backend/                 # Django 后端
+│   ├── config/             # Django 项目配置
+│   │   ├── settings.py     # 项目设置
+│   │   ├── urls.py         # 根 URL 配置
+│   │   └── wsgi.py         # WSGI 配置
+│   ├── apps/               # Django 应用
+│   │   ├── courses/        # 课程管理应用
+│   │   └── users/          # 用户管理应用
+│   ├── venv/               # Python 虚拟环境
+│   ├── manage.py           # Django 管理命令
+│   ├── requirements.txt    # Python 依赖
+│   └── .env                # 后端环境变量
+│
+├── frontend/               # Vue 前端
+│   ├── src/
+│   │   ├── api/            # API 接口定义
+│   │   ├── assets/         # 静态资源
+│   │   ├── components/     # Vue 组件
+│   │   ├── router/         # 路由配置
+│   │   ├── stores/         # Pinia 状态管理
+│   │   ├── utils/          # 工具函数
+│   │   ├── views/          # 页面组件
+│   │   ├── App.vue         # 根组件
+│   │   └── main.ts         # 入口文件
+│   ├── public/             # 公共资源
+│   ├── package.json        # npm 配置
+│   ├── vite.config.ts      # Vite 配置
+│   └── .env.development    # 前端开发环境变量
+│
+├── docker-compose.yml      # Docker Compose 配置
 ├── .gitignore
 └── README.md
 ```
 
 ## 开发指南
 
-### 数据库操作
+### 后端开发
+
+#### 创建新的 Django 应用
+```bash
+cd backend
+source venv/bin/activate
+python manage.py startapp apps/your_app_name
+```
+
+#### 数据库操作
+```bash
+# 创建迁移文件
+python manage.py makemigrations
+
+# 应用迁移
+python manage.py migrate
+
+# 使用 psql 连接数据库
+docker exec -it ai_course_postgres psql -U postgres -d ai_course_platform
+```
+
+#### API 测试
+```bash
+# 使用 Django REST Framework 提供的可浏览 API
+# 访问 http://localhost:8000/api/
+
+# 或使用 curl
+curl http://localhost:8000/api/
+```
+
+### 前端开发
+
+#### 构建生产版本
+```bash
+cd frontend
+npm run build
+```
+
+#### 代码格式化
+```bash
+npm run format
+```
+
+#### 运行测试
+```bash
+npm run test:unit
+```
+
+### 数据库管理
 
 使用 psql 命令行工具:
 ```bash
@@ -92,6 +231,20 @@ psql postgresql://postgres:postgres@localhost:5432/ai_course_platform
 - Database: ai_course_platform
 - User: postgres
 - Password: postgres
+
+## 部署说明
+
+### 开发环境
+- 前端: Vite 开发服务器 (`npm run dev`)
+- 后端: Django 开发服务器 (`python manage.py runserver`)
+- 数据库: Docker PostgreSQL
+
+### 生产环境建议
+- 前端: 构建静态文件 (`npm run build`)，使用 Nginx 托管
+- 后端: 使用 Gunicorn + Nginx
+- 数据库: Docker PostgreSQL (自建) 或云数据库服务
+- 反向代理: Nginx
+- 进程管理: Supervisor 或 systemd
 
 ## 贡献
 
