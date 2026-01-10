@@ -13,6 +13,7 @@
 - **数据库**: PostgreSQL 17 (官方 Alpine 镜像)
 - **认证**: JWT (djangorestframework-simplejwt)
 - **API 文档**: drf-spectacular (Swagger/OpenAPI)
+- **包管理**: uv (比 pip 快 10-100 倍 ⚡)
 - **容器化**: Docker & Docker Compose
 
 ### 前端 (Frontend)
@@ -43,8 +44,19 @@
 
 - Docker Desktop
 - Python 3.8+
+- **uv** (Python 包管理器) - [安装指南](https://github.com/astral-sh/uv)
 - Node.js 18+
 - npm 或 yarn
+
+#### 安装 uv (推荐)
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 或使用 Homebrew (macOS)
+brew install uv
+```
 
 ### 启动步骤
 
@@ -64,8 +76,15 @@ docker ps
 # 进入后端目录
 cd backend
 
+# 创建虚拟环境（首次运行）
+uv venv
+
 # 激活虚拟环境
-source venv/bin/activate
+source .venv/bin/activate  # macOS/Linux
+# .venv\Scripts\activate  # Windows
+
+# 安装依赖（首次运行）
+uv pip install -r requirements.txt
 
 # 运行数据库迁移
 python manage.py migrate
@@ -138,9 +157,11 @@ ai_course_platform/
 │   ├── apps/               # Django 应用
 │   │   ├── courses/        # 课程管理应用
 │   │   └── users/          # 用户管理应用
-│   ├── venv/               # Python 虚拟环境
+│   ├── .venv/              # Python 虚拟环境 (uv 创建)
 │   ├── manage.py           # Django 管理命令
 │   ├── requirements.txt    # Python 依赖
+│   ├── pyproject.toml      # 项目配置 (uv)
+│   ├── README.md           # 后端文档
 │   └── .env                # 后端环境变量
 │
 ├── frontend/               # Vue 前端
@@ -168,10 +189,23 @@ ai_course_platform/
 
 ### 后端开发
 
+#### 使用 uv 管理依赖
+
+```bash
+# 安装新包
+uv pip install package-name
+
+# 更新 requirements.txt
+uv pip freeze > requirements.txt
+
+# 列出已安装的包
+uv pip list
+```
+
 #### 创建新的 Django 应用
 ```bash
 cd backend
-source venv/bin/activate
+source .venv/bin/activate
 python manage.py startapp apps/your_app_name
 ```
 
