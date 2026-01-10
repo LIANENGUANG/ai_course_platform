@@ -1,11 +1,13 @@
 import React from 'react';
-import { Card, Row, Col, Statistic } from 'antd';
+import { Card, Row, Col, Statistic, Typography, Space } from 'antd';
 import { BookOutlined, UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
+
+const { Title } = Typography;
 
 const DashboardPage: React.FC = () => {
   return (
-    <div>
-      <h1 style={{ marginBottom: 24 }}>欢迎回来！</h1>
+    <Space direction="vertical" size="large">
+      <Title level={1}>欢迎回来！</Title>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} lg={8}>
           <Card>
@@ -38,7 +40,7 @@ const DashboardPage: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Space>
   );
 };
 

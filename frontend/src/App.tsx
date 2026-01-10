@@ -13,7 +13,6 @@ import ProfileEditPage from './pages/user/ProfileEditPage';
 import ChangePasswordPage from './pages/user/ChangePasswordPage';
 import { useUserStore } from './store/useUserStore';
 import { useThemeStore } from './store/useThemeStore';
-import './App.css';
 
 function App() {
   const { isLoggedIn } = useUserStore();

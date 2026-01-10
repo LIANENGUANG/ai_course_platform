@@ -62,47 +62,44 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div>
-      <Space direction="vertical" size="large" style={{ width: '100%' }}>
-        <Card loading={loading}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
-            <Avatar
-              size={120}
-              src={user.profile.avatar}
-              icon={!user.profile.avatar && <UserOutlined />}
-            />
-            <div style={{ flex: 1 }}>
-              <div style={{ marginBottom: '16px' }}>
-                <h2 style={{ margin: 0, marginBottom: '8px' }}>
-                  {user.profile.nickname || user.username}
-                </h2>
+    <Space direction="vertical" size="large">
+      <Card loading={loading}>
+        <Space direction="horizontal" size="large" align="start">
+          <Avatar
+            size={120}
+            src={user.profile.avatar}
+            icon={!user.profile.avatar && <UserOutlined />}
+          />
+          <Space direction="vertical">
+            <Space direction="vertical" size="small">
+              <Space>
+                <h2>{user.profile.nickname || user.username}</h2>
                 <Tag color={getRoleColor(user.profile.role)}>
                   {getRoleText(user.profile.role)}
                 </Tag>
-              </div>
-              <p style={{ color: '#666', marginBottom: '16px' }}>
-                {user.profile.bio || '这个人很懒，什么都没有留下...'}
-              </p>
-              <Space>
-                <Button
-                  type="primary"
-                  icon={<EditOutlined />}
-                  onClick={() => navigate('/profile/edit')}
-                >
-                  编辑资料
-                </Button>
-                <Button
-                  icon={<LockOutlined />}
-                  onClick={() => navigate('/profile/password')}
-                >
-                  修改密码
-                </Button>
               </Space>
-            </div>
-          </div>
-        </Card>
+              <p>{user.profile.bio || '这个人很懒，什么都没有留下...'}</p>
+            </Space>
+            <Space>
+              <Button
+                type="primary"
+                icon={<EditOutlined />}
+                onClick={() => navigate('/profile/edit')}
+              >
+                编辑资料
+              </Button>
+              <Button
+                icon={<LockOutlined />}
+                onClick={() => navigate('/profile/password')}
+              >
+                修改密码
+              </Button>
+            </Space>
+          </Space>
+        </Space>
+      </Card>
 
-        <Card title="基本信息" loading={loading}>
+      <Card title="基本信息" loading={loading}>
           <Descriptions column={2} bordered>
             <Descriptions.Item label="用户名">{user.username}</Descriptions.Item>
             <Descriptions.Item label="邮箱">{user.email}</Descriptions.Item>
@@ -126,7 +123,6 @@ const ProfilePage: React.FC = () => {
           </Descriptions>
         </Card>
       </Space>
-    </div>
   );
 };
 

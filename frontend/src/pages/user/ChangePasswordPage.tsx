@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Input, Button, message } from 'antd';
+import { Card, Form, Input, Button, message, Space } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../api/auth';
@@ -41,7 +41,6 @@ const ChangePasswordPage: React.FC = () => {
         layout="vertical"
         onFinish={onFinish}
         autoComplete="off"
-        style={{ maxWidth: 600 }}
       >
         <Form.Item
           label="当前密码"
@@ -91,12 +90,14 @@ const ChangePasswordPage: React.FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            修改密码
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={() => navigate('/profile')}>
-            取消
-          </Button>
+          <Space>
+            <Button type="primary" htmlType="submit" loading={loading}>
+              修改密码
+            </Button>
+            <Button onClick={() => navigate('/profile')}>
+              取消
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </Card>
@@ -104,3 +105,4 @@ const ChangePasswordPage: React.FC = () => {
 };
 
 export default ChangePasswordPage;
+

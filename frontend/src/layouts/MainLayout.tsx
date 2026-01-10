@@ -10,11 +10,11 @@ import {
   BulbOutlined,
   BulbFilled,
 } from '@ant-design/icons';
-import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import { useThemeStore } from '../store/useThemeStore';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 const MainLayout: React.FC = () => {
   const {
@@ -147,9 +147,7 @@ const MainLayout: React.FC = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', marginRight: '50px' }}>
-          AI 课程平台
-        </div>
+        <div>AI 课程平台</div>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -174,12 +172,12 @@ const MainLayout: React.FC = () => {
                 icon={!user?.profile.avatar && <UserOutlined />}
                 size="default"
               />
-              <span style={{ color: '#fff' }}>{user?.profile.nickname || user?.username}</span>
+              <span>{user?.profile.nickname || user?.username}</span>
             </div>
           </Dropdown>
         </div>
       </Header>
-      <Layout>
+      <Layout style={{ flex: 1 }}>
         <Sider width={200} style={{ background: colorBgContainer }}>
           <Menu
             mode="inline"
@@ -205,6 +203,18 @@ const MainLayout: React.FC = () => {
           </Content>
         </Layout>
       </Layout>
+      <Footer style={{ textAlign: 'center', padding: '8px 50px', background: '#001529', color: 'rgba(255, 255, 255, 0.85)' }}>
+        <div>
+          AI 课程平台 ©2026 Created by AI Team
+          {' | '}
+          <Link to="/about" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>关于我们</Link>
+          {' | '}
+          <Link to="/contact" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>联系我们</Link>
+          {' | '}
+          <Link to="/privacy" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>隐私政策</Link>
+        </div>
+        <div>ICP备案号：京ICP备xxxxx号</div>
+      </Footer>
     </Layout>
   );
 };

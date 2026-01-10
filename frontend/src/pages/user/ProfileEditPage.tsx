@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Form, Input, Button, Radio, DatePicker, message } from 'antd';
+import { Card, Form, Input, Button, Radio, DatePicker, message, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useUserStore } from '../../store/useUserStore';
@@ -55,7 +55,6 @@ const ProfileEditPage: React.FC = () => {
         layout="vertical"
         onFinish={onFinish}
         autoComplete="off"
-        style={{ maxWidth: 600 }}
       >
         <Form.Item
           label="昵称"
@@ -80,7 +79,7 @@ const ProfileEditPage: React.FC = () => {
           label="生日"
           name="birthday"
         >
-          <DatePicker style={{ width: '100%' }} />
+          <DatePicker />
         </Form.Item>
 
         <Form.Item
@@ -103,12 +102,14 @@ const ProfileEditPage: React.FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            保存修改
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={() => navigate('/profile')}>
-            取消
-          </Button>
+          <Space>
+            <Button type="primary" htmlType="submit" loading={loading}>
+              保存修改
+            </Button>
+            <Button onClick={() => navigate('/profile')}>
+              取消
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </Card>
