@@ -297,7 +297,7 @@ const MainLayout: React.FC = () => {
           </div>
           <Footer style={{ textAlign: 'center', padding: `${token.paddingXS}px ${token.paddingLG}px` }}>
             <div>
-              菁语教育 ©2026 Created by LIANE AI Team
+              菁语教育 ©2026 Created by LIANEG AI Team
               {' | '}
               <Link to="/about">关于我们</Link>
               {' | '}
