@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Form, Input, Button, message, Space } from 'antd';
+import { Card, Form, Input, Button, message, Space, theme } from 'antd';
 import { Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../api/auth';
 import type { ChangePasswordRequest } from '../../utils/types';
 
 const ChangePasswordPage: React.FC = () => {
+  const { token } = theme.useToken();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -48,7 +49,7 @@ const ChangePasswordPage: React.FC = () => {
           rules={[{ required: true, message: '请输入当前密码' }]}
         >
           <Input.Password
-            prefix={<Lock size={16} />}
+            prefix={<Lock size={token.fontSizeLG} />}
             placeholder="请输入当前密码"
           />
         </Form.Item>
@@ -62,7 +63,7 @@ const ChangePasswordPage: React.FC = () => {
           ]}
         >
           <Input.Password
-            prefix={<Lock size={16} />}
+            prefix={<Lock size={token.fontSizeLG} />}
             placeholder="请输入新密码（至少6个字符）"
           />
         </Form.Item>
@@ -84,7 +85,7 @@ const ChangePasswordPage: React.FC = () => {
           ]}
         >
           <Input.Password
-            prefix={<Lock size={16} />}
+            prefix={<Lock size={token.fontSizeLG} />}
             placeholder="请再次输入新密码"
           />
         </Form.Item>

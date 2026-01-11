@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Avatar, Descriptions, Tag, Button, Space, message } from 'antd';
+import { Card, Avatar, Descriptions, Tag, Button, Space, message, theme } from 'antd';
 import { User as UserIcon, Edit, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../store/useUserStore';
@@ -7,6 +7,7 @@ import { getCurrentUser } from '../../api/auth';
 import type { User } from '../../utils/types';
 
 const ProfilePage: React.FC = () => {
+  const { token } = theme.useToken();
   const navigate = useNavigate();
   const { user: storeUser, updateUser } = useUserStore();
   const [user, setUser] = useState<User | null>(storeUser);
@@ -82,13 +83,13 @@ const ProfilePage: React.FC = () => {
             <Space>
               <Button
                 type="primary"
-                icon={<Edit size={16} />}
+                icon={<Edit size={token.fontSizeLG} />}
                 onClick={() => navigate('/profile/edit')}
               >
                 编辑资料
               </Button>
               <Button
-                icon={<Lock size={16} />}
+                icon={<Lock size={token.fontSizeLG} />}
                 onClick={() => navigate('/profile/password')}
               >
                 修改密码

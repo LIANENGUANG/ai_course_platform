@@ -45,32 +45,32 @@ const MainLayout: React.FC = () => {
   const headerMenuItems: MenuProps['items'] = [
     {
       key: '/dashboard',
-      icon: <Home size={16} />,
+      icon: <Home size={token.fontSizeLG} />,
       label: '首页',
       title: 'AI 智能助手',
       style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/teaching-system',
-      icon: <GraduationCap size={16} />,
+      icon: <GraduationCap size={token.fontSizeLG} />,
       label: '教学系统',
       style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/support',
-      icon: <MessageSquare size={16} />,
+      icon: <MessageSquare size={token.fontSizeLG} />,
       label: '客服支持',
       style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/trial',
-      icon: <Zap size={16} />,
+      icon: <Zap size={token.fontSizeLG} />,
       label: '试用',
       style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/pricing',
-      icon: <DollarSign size={16} />,
+      icon: <DollarSign size={token.fontSizeLG} />,
       label: '定价',
       style: { padding: `0 ${token.paddingSM}px` },
     },
@@ -80,59 +80,59 @@ const MainLayout: React.FC = () => {
   const siderMenuItems: MenuProps['items'] = [
     {
       key: '/courses',
-      icon: <BookOpen size={18} />,
+      icon: <BookOpen size={token.fontSizeLG} />,
       label: '我的课程',
     },
     {
       key: 'learning',
-      icon: <GraduationCap size={18} />,
+      icon: <GraduationCap size={token.fontSizeLG} />,
       label: '学习中心',
       children: [
-        { key: '/learning/video', icon: <Video size={16} />, label: '视频课程' },
-        { key: '/learning/live', icon: <Radio size={16} />, label: '直播课程' },
-        { key: '/learning/offline', icon: <Calendar size={16} />, label: '线下课程' },
-        { key: '/learning/history', icon: <History size={16} />, label: '学习历史' },
-        { key: '/learning/notes', icon: <FileText size={16} />, label: '我的笔记' },
+        { key: '/learning/video', icon: <Video size={token.fontSizeLG} />, label: '视频课程' },
+        { key: '/learning/live', icon: <Radio size={token.fontSizeLG} />, label: '直播课程' },
+        { key: '/learning/offline', icon: <Calendar size={token.fontSizeLG} />, label: '线下课程' },
+        { key: '/learning/history', icon: <History size={token.fontSizeLG} />, label: '学习历史' },
+        { key: '/learning/notes', icon: <FileText size={token.fontSizeLG} />, label: '我的笔记' },
       ],
     },
     {
       key: 'homework',
-      icon: <ClipboardList size={18} />,
+      icon: <ClipboardList size={token.fontSizeLG} />,
       label: '作业管理',
       children: [
-        { key: '/homework/pending', icon: <CheckSquare size={16} />, label: '待完成' },
-        { key: '/homework/submitted', icon: <FileCheck size={16} />, label: '已提交' },
-        { key: '/homework/graded', icon: <Award size={16} />, label: '已批改' },
+        { key: '/homework/pending', icon: <CheckSquare size={token.fontSizeLG} />, label: '待完成' },
+        { key: '/homework/submitted', icon: <FileCheck size={token.fontSizeLG} />, label: '已提交' },
+        { key: '/homework/graded', icon: <Award size={token.fontSizeLG} />, label: '已批改' },
       ],
     },
     {
       key: 'exam',
-      icon: <Trophy size={18} />,
+      icon: <Trophy size={token.fontSizeLG} />,
       label: '考试中心',
       children: [
-        { key: '/exam/upcoming', icon: <Calendar size={16} />, label: '即将开始' },
-        { key: '/exam/history', icon: <History size={16} />, label: '考试记录' },
-        { key: '/exam/certificate', icon: <Award size={16} />, label: '证书管理' },
+        { key: '/exam/upcoming', icon: <Calendar size={token.fontSizeLG} />, label: '即将开始' },
+        { key: '/exam/history', icon: <History size={token.fontSizeLG} />, label: '考试记录' },
+        { key: '/exam/certificate', icon: <Award size={token.fontSizeLG} />, label: '证书管理' },
       ],
     },
     {
       key: 'community',
-      icon: <MessageSquare size={18} />,
+      icon: <MessageSquare size={token.fontSizeLG} />,
       label: '社区交流',
       children: [
-        { key: '/community/discussion', icon: <MessageSquare size={16} />, label: '讨论区' },
-        { key: '/community/qa', icon: <HelpCircle size={16} />, label: '问答' },
-        { key: '/community/activities', icon: <Zap size={16} />, label: '活动' },
+        { key: '/community/discussion', icon: <MessageSquare size={token.fontSizeLG} />, label: '讨论区' },
+        { key: '/community/qa', icon: <HelpCircle size={token.fontSizeLG} />, label: '问答' },
+        { key: '/community/activities', icon: <Zap size={token.fontSizeLG} />, label: '活动' },
       ],
     },
     {
       key: 'resources',
-      icon: <FileType size={18} />,
+      icon: <FileType size={token.fontSizeLG} />,
       label: '资源库',
       children: [
-        { key: '/resources/documents', icon: <FileText size={16} />, label: '文档资料' },
-        { key: '/resources/videos', icon: <Video size={16} />, label: '视频资源' },
-        { key: '/resources/downloads', icon: <Download size={16} />, label: '下载中心' },
+        { key: '/resources/documents', icon: <FileText size={token.fontSizeLG} />, label: '文档资料' },
+        { key: '/resources/videos', icon: <Video size={token.fontSizeLG} />, label: '视频资源' },
+        { key: '/resources/downloads', icon: <Download size={token.fontSizeLG} />, label: '下载中心' },
       ],
     },
   ];
@@ -141,13 +141,13 @@ const MainLayout: React.FC = () => {
   const userMenuItems: MenuProps['items'] = [
     {
       key: 'profile',
-      icon: <User size={16} />,
+      icon: <User size={token.fontSizeLG} />,
       label: '个人信息',
       onClick: () => navigate('/profile'),
     },
     {
       key: 'settings',
-      icon: <Settings size={16} />,
+      icon: <Settings size={token.fontSizeLG} />,
       label: '账号设置',
       onClick: () => navigate('/profile/edit'),
     },
@@ -156,7 +156,7 @@ const MainLayout: React.FC = () => {
     },
     {
       key: 'logout',
-      icon: <LogOut size={16} />,
+      icon: <LogOut size={token.fontSizeLG} />,
       label: '退出登录',
       onClick: async () => {
         await logout();
@@ -234,7 +234,7 @@ const MainLayout: React.FC = () => {
           alt="菁语 EduSmart AI"
           onClick={() => navigate('/dashboard')}
           style={{
-            height: 40,
+            height: token.sizeLG,
             marginRight: token.marginLG,
             cursor: 'pointer',
             userSelect: 'none',
@@ -242,7 +242,7 @@ const MainLayout: React.FC = () => {
         />
         <Input
           placeholder="搜索课程、资源..."
-          prefix={<Search size={16} />}
+          prefix={<Search size={token.fontSizeLG} />}
           style={{ width: 250, marginRight: token.marginLG }}
           allowClear
         />
@@ -277,9 +277,9 @@ const MainLayout: React.FC = () => {
             }}
           >
             {mode === 'dark' ? (
-              <Sun size={20} strokeWidth={2} />
+              <Sun size={token.fontSizeXL} strokeWidth={2} />
             ) : (
-              <Moon size={20} strokeWidth={2} />
+              <Moon size={token.fontSizeXL} strokeWidth={2} />
             )}
           </div>
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">

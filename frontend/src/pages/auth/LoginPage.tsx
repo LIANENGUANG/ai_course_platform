@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
               rules={[{ required: true, message: '请输入用户名' }]}
             >
               <Input
-                prefix={<User size={16} />}
+                prefix={<User size={token.fontSizeLG} />}
                 placeholder="用户名"
                 autoComplete="off"
               />
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
               rules={[{ required: true, message: '请输入密码' }]}
             >
               <Input.Password
-                prefix={<Lock size={16} />}
+                prefix={<Lock size={token.fontSizeLG} />}
                 placeholder="密码"
                 autoComplete="off"
               />

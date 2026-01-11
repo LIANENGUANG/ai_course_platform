@@ -57,7 +57,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input
-                prefix={<User size={16} />}
+                prefix={<User size={token.fontSizeLG} />}
                 placeholder="用户名"
                 autoComplete="off"
               />
@@ -71,7 +71,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input
-                prefix={<Mail size={16} />}
+                prefix={<Mail size={token.fontSizeLG} />}
                 placeholder="邮箱"
                 autoComplete="off"
               />
@@ -82,7 +82,7 @@ const RegisterPage: React.FC = () => {
               rules={[{ required: false }]}
             >
               <Input
-                prefix={<User size={16} />}
+                prefix={<User size={token.fontSizeLG} />}
                 placeholder="昵称（可选）"
                 autoComplete="off"
               />
@@ -96,7 +96,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input.Password
-                prefix={<Lock size={16} />}
+                prefix={<Lock size={token.fontSizeLG} />}
                 placeholder="密码"
                 autoComplete="off"
               />
@@ -118,7 +118,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input.Password
-                prefix={<Lock size={16} />}
+                prefix={<Lock size={token.fontSizeLG} />}
                 placeholder="确认密码"
                 autoComplete="off"
               />
