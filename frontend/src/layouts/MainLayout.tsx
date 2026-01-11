@@ -26,6 +26,7 @@ import {
   Download,
   Search,
   Home,
+  Layout as LayoutIcon,
 } from 'lucide-react';
 import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
@@ -50,12 +51,6 @@ const MainLayout: React.FC = () => {
       style: { padding: `0 ${token.paddingXS}px` },
     },
     {
-      key: '/teaching-system',
-      icon: <GraduationCap size={token.fontSizeLG} />,
-      label: '教学系统',
-      style: { padding: `0 ${token.paddingXS}px` },
-    },
-    {
       key: '/support',
       icon: <MessageSquare size={token.fontSizeLG} />,
       label: '客服支持',
@@ -65,6 +60,11 @@ const MainLayout: React.FC = () => {
 
   // Sider 菜单项
   const siderMenuItems: MenuProps['items'] = [
+    {
+      key: '/teaching-system',
+      icon: <LayoutIcon size={token.fontSizeLG} />,
+      label: '教学系统',
+    },
     {
       key: '/courses',
       icon: <BookOpen size={token.fontSizeLG} />,
