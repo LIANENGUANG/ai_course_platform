@@ -221,7 +221,6 @@ const MainLayout: React.FC = () => {
           alt="菁语 EduSmart AI"
           onClick={() => navigate('/dashboard')}
           style={{
-            height: token.sizeLG,
             marginRight: token.marginLG,
             cursor: 'pointer',
             userSelect: 'none',
