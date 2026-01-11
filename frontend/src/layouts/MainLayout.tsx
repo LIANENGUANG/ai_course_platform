@@ -26,7 +26,6 @@ import {
   Download,
   Search,
   Home,
-  DollarSign,
 } from 'lucide-react';
 import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
@@ -60,18 +59,6 @@ const MainLayout: React.FC = () => {
       key: '/support',
       icon: <MessageSquare size={token.fontSizeLG} />,
       label: '客服支持',
-      style: { padding: `0 ${token.paddingXS}px` },
-    },
-    {
-      key: '/trial',
-      icon: <Zap size={token.fontSizeLG} />,
-      label: '试用',
-      style: { padding: `0 ${token.paddingXS}px` },
-    },
-    {
-      key: '/pricing',
-      icon: <DollarSign size={token.fontSizeLG} />,
-      label: '定价',
       style: { padding: `0 ${token.paddingXS}px` },
     },
   ];
