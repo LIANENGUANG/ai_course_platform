@@ -261,8 +261,7 @@ const MainLayout: React.FC = () => {
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
             <div style={{ display: 'flex', alignItems: 'center', gap: token.marginXS, cursor: 'pointer' }}>
               <Avatar
-                src={user?.profile.avatar}
-                icon={!user?.profile.avatar && <User size={16} />}
+                src={user?.profile.avatar || '/default-avatar.png'}
                 size="default"
               />
               <span>{user?.profile.nickname || user?.username}</span>

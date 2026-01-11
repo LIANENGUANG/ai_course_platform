@@ -67,8 +67,7 @@ const ProfilePage: React.FC = () => {
         <Space direction="horizontal" size="large" align="start">
           <Avatar
             size={120}
-            src={user.profile.avatar}
-            icon={!user.profile.avatar && <UserIcon size={48} />}
+            src={user.profile.avatar || '/default-avatar.png'}
           />
           <Space direction="vertical">
             <Space direction="vertical" size="small">
