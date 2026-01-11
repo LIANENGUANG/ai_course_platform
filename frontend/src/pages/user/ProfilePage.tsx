@@ -67,7 +67,7 @@ const ProfilePage: React.FC = () => {
       <Card loading={loading}>
         <Space direction="horizontal" size="large" align="start">
           <Avatar
-            size={120}
+            size={token.sizeXXL * 2}
             src={user.profile.avatar || '/default-avatar.png'}
           />
           <Space direction="vertical">
