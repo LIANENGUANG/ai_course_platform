@@ -39,6 +39,26 @@ const MainLayout: React.FC = () => {
   const { user, logout } = useUserStore();
   const { mode, toggleTheme } = useThemeStore();
 
+  // Header 菜单项
+  const headerMenuItems: MenuProps['items'] = [
+    {
+      key: '/teaching-system',
+      label: '教学系统',
+    },
+    {
+      key: '/support',
+      label: '客服支持',
+    },
+    {
+      key: '/trial',
+      label: '试用',
+    },
+    {
+      key: '/pricing',
+      label: '定价',
+    },
+  ];
+
   // Sider 菜单项
   const siderMenuItems: MenuProps['items'] = [
     {
@@ -204,13 +224,20 @@ const MainLayout: React.FC = () => {
         >
           AI 课程平台
         </div>
+        <Menu
+          mode="horizontal"
+          selectedKeys={[]}
+          items={headerMenuItems}
+          onClick={handleMenuClick}
+          style={{ flex: 1, minWidth: 0, borderBottom: 'none' }}
+        />
         <Input
           placeholder="搜索课程、资源..."
           prefix={<Search size={16} />}
-          style={{ maxWidth: 400, flex: 1 }}
+          style={{ maxWidth: 400, marginRight: token.marginLG }}
           allowClear
         />
-        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: token.marginLG }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: 'auto' }}>
           <div
             onClick={toggleTheme}
             style={{
