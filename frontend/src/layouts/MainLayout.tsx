@@ -1,8 +1,7 @@
 import React from 'react';
-import { Layout, Menu, Dropdown, Avatar, Breadcrumb, theme } from 'antd';
+import { Layout, Menu, Dropdown, Avatar, Breadcrumb, theme, Input } from 'antd';
 import type { MenuProps } from 'antd';
 import {
-  Home,
   BookOpen,
   User,
   LogOut,
@@ -25,6 +24,7 @@ import {
   Zap,
   FileType,
   Download,
+  Search,
 } from 'lucide-react';
 import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
@@ -39,25 +39,8 @@ const MainLayout: React.FC = () => {
   const { user, logout } = useUserStore();
   const { mode, toggleTheme } = useThemeStore();
 
-  // Header 菜单项
-  const headerMenuItems: MenuProps['items'] = [
-    {
-      key: '/dashboard',
-      label: '首页',
-    },
-    {
-      key: '/courses',
-      label: '我的课程',
-    },
-  ];
-
   // Sider 菜单项
   const siderMenuItems: MenuProps['items'] = [
-    {
-      key: '/dashboard',
-      icon: <Home size={18} />,
-      label: '首页',
-    },
     {
       key: '/courses',
       icon: <BookOpen size={18} />,
@@ -115,28 +98,6 @@ const MainLayout: React.FC = () => {
         { key: '/resources/downloads', icon: <Download size={16} />, label: '下载中心' },
       ],
     },
-    {
-      key: 'user',
-      icon: <User size={18} />,
-      label: '个人中心',
-      children: [
-        {
-          key: '/profile',
-          icon: <User size={16} />,
-          label: '个人信息',
-        },
-        {
-          key: '/profile/edit',
-          icon: <Settings size={16} />,
-          label: '编辑资料',
-        },
-        {
-          key: '/profile/password',
-          icon: <Settings size={16} />,
-          label: '修改密码',
-        },
-      ],
-    },
   ];
 
   // 用户下拉菜单
@@ -169,7 +130,7 @@ const MainLayout: React.FC = () => {
 
   // 处理菜单点击
   const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
-    if (key && !key.startsWith('user')) {
+    if (key) {
       navigate(key);
     }
   };
@@ -177,26 +138,34 @@ const MainLayout: React.FC = () => {
   // 获取当前选中的菜单项
   const getSelectedKeys = () => {
     const path = location.pathname;
-    if (path.startsWith('/profile/edit')) return ['/profile/edit'];
-    if (path.startsWith('/profile/password')) return ['/profile/password'];
-    if (path.startsWith('/profile')) return ['/profile'];
     if (path.startsWith('/courses')) return ['/courses'];
-    return ['/dashboard'];
+    if (path.startsWith('/learning')) return [path];
+    if (path.startsWith('/homework')) return [path];
+    if (path.startsWith('/exam')) return [path];
+    if (path.startsWith('/community')) return [path];
+    if (path.startsWith('/resources')) return [path];
+    return [];
   };
 
   // 获取当前打开的子菜单
   const getOpenKeys = () => {
     const path = location.pathname;
-    if (path.startsWith('/profile')) return ['user'];
+    if (path.startsWith('/learning')) return ['learning'];
+    if (path.startsWith('/homework')) return ['homework'];
+    if (path.startsWith('/exam')) return ['exam'];
+    if (path.startsWith('/community')) return ['community'];
+    if (path.startsWith('/resources')) return ['resources'];
     return [];
   };
 
   // 生成面包屑
   const getBreadcrumbItems = () => {
     const path = location.pathname;
-    const items = [{ title: '首页' }];
+    const items: { title: string }[] = [];
 
-    if (path.startsWith('/courses')) {
+    if (path === '/dashboard') {
+      items.push({ title: '首页' });
+    } else if (path.startsWith('/courses')) {
       items.push({ title: '我的课程' });
     } else if (path.startsWith('/profile')) {
       items.push({ title: '个人中心' });
@@ -223,17 +192,25 @@ const MainLayout: React.FC = () => {
           padding: `0 ${token.paddingLG}px`,
         }}
       >
-        <div style={{ marginRight: token.marginLG, fontSize: token.fontSizeLG, fontWeight: 'bold' }}>
+        <div
+          onClick={() => navigate('/dashboard')}
+          style={{
+            marginRight: token.marginLG,
+            fontSize: token.fontSizeLG,
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            userSelect: 'none',
+          }}
+        >
           AI 课程平台
         </div>
-        <Menu
-          mode="horizontal"
-          selectedKeys={getSelectedKeys()}
-          items={headerMenuItems}
-          onClick={handleMenuClick}
-          style={{ flex: 1, minWidth: 0 }}
+        <Input
+          placeholder="搜索课程、资源..."
+          prefix={<Search size={16} />}
+          style={{ maxWidth: 400, flex: 1 }}
+          allowClear
         />
-        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: token.marginLG }}>
           <div
             onClick={toggleTheme}
             style={{
