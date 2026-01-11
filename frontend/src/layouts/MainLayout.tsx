@@ -25,6 +25,8 @@ import {
   FileType,
   Download,
   Search,
+  Home,
+  DollarSign,
 } from 'lucide-react';
 import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
@@ -43,23 +45,28 @@ const MainLayout: React.FC = () => {
   const headerMenuItems: MenuProps['items'] = [
     {
       key: '/dashboard',
+      icon: <Home size={16} />,
       label: '首页',
       title: 'AI 智能助手',
     },
     {
       key: '/teaching-system',
+      icon: <GraduationCap size={16} />,
       label: '教学系统',
     },
     {
       key: '/support',
+      icon: <MessageSquare size={16} />,
       label: '客服支持',
     },
     {
       key: '/trial',
+      icon: <Zap size={16} />,
       label: '试用',
     },
     {
       key: '/pricing',
+      icon: <DollarSign size={16} />,
       label: '定价',
     },
   ];
