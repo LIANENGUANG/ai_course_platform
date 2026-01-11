@@ -48,26 +48,31 @@ const MainLayout: React.FC = () => {
       icon: <Home size={16} />,
       label: '首页',
       title: 'AI 智能助手',
+      style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/teaching-system',
       icon: <GraduationCap size={16} />,
       label: '教学系统',
+      style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/support',
       icon: <MessageSquare size={16} />,
       label: '客服支持',
+      style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/trial',
       icon: <Zap size={16} />,
       label: '试用',
+      style: { padding: `0 ${token.paddingSM}px` },
     },
     {
       key: '/pricing',
       icon: <DollarSign size={16} />,
       label: '定价',
+      style: { padding: `0 ${token.paddingSM}px` },
     },
   ];
 
@@ -247,7 +252,10 @@ const MainLayout: React.FC = () => {
           selectedKeys={[]}
           items={headerMenuItems}
           onClick={handleMenuClick}
-          style={{ borderBottom: 'none', minWidth: 0 }}
+          style={{
+            borderBottom: 'none',
+            minWidth: 0,
+          }}
         />
         <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: token.marginLG }}>
           <div
