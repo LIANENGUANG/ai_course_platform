@@ -8,6 +8,9 @@ psycopg2-binary==2.9.10
 # CORS
 django-cors-headers==4.6.0
 
+# Static Files (生产环境服务静态文件)
+whitenoise==6.8.2
+
 # Environment Variables
 python-dotenv==1.0.1
 

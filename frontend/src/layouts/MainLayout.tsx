@@ -17,10 +17,7 @@ import { useThemeStore } from '../store/useThemeStore';
 const { Header, Sider, Content, Footer } = Layout;
 
 const MainLayout: React.FC = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
+  const { token } = theme.useToken();
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useUserStore();
@@ -49,6 +46,58 @@ const MainLayout: React.FC = () => {
       key: '/courses',
       icon: <BookOutlined />,
       label: '我的课程',
+    },
+    {
+      key: 'learning',
+      icon: <BookOutlined />,
+      label: '学习中心',
+      children: [
+        { key: '/learning/video', label: '视频课程' },
+        { key: '/learning/live', label: '直播课程' },
+        { key: '/learning/offline', label: '线下课程' },
+        { key: '/learning/history', label: '学习历史' },
+        { key: '/learning/notes', label: '我的笔记' },
+      ],
+    },
+    {
+      key: 'homework',
+      icon: <BookOutlined />,
+      label: '作业管理',
+      children: [
+        { key: '/homework/pending', label: '待完成' },
+        { key: '/homework/submitted', label: '已提交' },
+        { key: '/homework/graded', label: '已批改' },
+      ],
+    },
+    {
+      key: 'exam',
+      icon: <BookOutlined />,
+      label: '考试中心',
+      children: [
+        { key: '/exam/upcoming', label: '即将开始' },
+        { key: '/exam/history', label: '考试记录' },
+        { key: '/exam/certificate', label: '证书管理' },
+      ],
+    },
+    {
+      key: 'community',
+      icon: <BookOutlined />,
+      label: '社区交流',
+      children: [
+        { key: '/community/discussion', label: '讨论区' },
+        { key: '/community/qa', label: '问答' },
+        { key: '/community/activities', label: '活动' },
+      ],
+    },
+    {
+      key: 'resources',
+      icon: <BookOutlined />,
+      label: '资源库',
+      children: [
+        { key: '/resources/documents', label: '文档资料' },
+        { key: '/resources/videos', label: '视频资源' },
+        { key: '/resources/downloads', label: '下载中心' },
+      ],
     },
     {
       key: 'user',
@@ -145,18 +194,27 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div>AI 课程平台</div>
+    <Layout style={{ height: '100vh', overflow: 'hidden' }}>
+      <Header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: token.colorBgContainer,
+          borderBottom: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
+          padding: `0 ${token.paddingLG}px`,
+        }}
+      >
+        <div style={{ marginRight: token.marginLG, fontSize: token.fontSizeLG, fontWeight: 'bold' }}>
+          AI 课程平台
+        </div>
         <Menu
-          theme="dark"
           mode="horizontal"
           selectedKeys={getSelectedKeys()}
           items={headerMenuItems}
           onClick={handleMenuClick}
           style={{ flex: 1, minWidth: 0 }}
         />
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin }}>
           <Tooltip title={mode === 'dark' ? '切换到浅色模式' : '切换到深色模式'}>
             <Switch
               checked={mode === 'dark'}
@@ -166,7 +224,7 @@ const MainLayout: React.FC = () => {
             />
           </Tooltip>
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: token.marginXS, cursor: 'pointer' }}>
               <Avatar
                 src={user?.profile.avatar}
                 icon={!user?.profile.avatar && <UserOutlined />}
@@ -177,44 +235,45 @@ const MainLayout: React.FC = () => {
           </Dropdown>
         </div>
       </Header>
-      <Layout style={{ flex: 1 }}>
-        <Sider width={200} style={{ background: colorBgContainer }}>
+      <Layout style={{ height: `calc(100vh - ${token.sizeXXL}px)`, overflow: 'hidden' }}>
+        <Sider width={200} style={{ overflowY: 'auto', height: '100%' }}>
           <Menu
             mode="inline"
             selectedKeys={getSelectedKeys()}
             defaultOpenKeys={getOpenKeys()}
-            style={{ height: '100%', borderInlineEnd: 0 }}
+            style={{ borderInlineEnd: 0, height: '100%' }}
             items={siderMenuItems}
             onClick={handleMenuClick}
           />
         </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb items={getBreadcrumbItems()} style={{ margin: '16px 0' }} />
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet />
-          </Content>
+        <Layout style={{ overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, padding: `0 ${token.paddingLG}px ${token.paddingLG}px` }}>
+            <Breadcrumb items={getBreadcrumbItems()} style={{ margin: `${token.margin}px 0` }} />
+            <Content
+              style={{
+                padding: 0,
+                margin: 0,
+              }}
+            >
+              <Outlet />
+            </Content>
+          </div>
+          <Footer style={{ textAlign: 'center', padding: `${token.paddingXS}px ${token.paddingLG}px` }}>
+            <div>
+              AI 课程平台 ©2026 Created by AI Team
+              {' | '}
+              <Link to="/about">关于我们</Link>
+              {' | '}
+              <Link to="/contact">联系我们</Link>
+              {' | '}
+              <Link to="/privacy">隐私政策</Link>
+            </div>
+            <div style={{ marginTop: token.marginXS, color: token.colorTextSecondary }}>
+              ICP备案号：京ICP备xxxxx号
+            </div>
+          </Footer>
         </Layout>
       </Layout>
-      <Footer style={{ textAlign: 'center', padding: '8px 50px', background: '#001529', color: 'rgba(255, 255, 255, 0.85)' }}>
-        <div>
-          AI 课程平台 ©2026 Created by AI Team
-          {' | '}
-          <Link to="/about" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>关于我们</Link>
-          {' | '}
-          <Link to="/contact" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>联系我们</Link>
-          {' | '}
-          <Link to="/privacy" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>隐私政策</Link>
-        </div>
-        <div>ICP备案号：京ICP备xxxxx号</div>
-      </Footer>
     </Layout>
   );
 };

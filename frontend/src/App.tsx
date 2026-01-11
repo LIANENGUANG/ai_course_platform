@@ -11,6 +11,9 @@ import CoursesPage from './pages/CoursesPage';
 import ProfilePage from './pages/user/ProfilePage';
 import ProfileEditPage from './pages/user/ProfileEditPage';
 import ChangePasswordPage from './pages/user/ChangePasswordPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
 import { useUserStore } from './store/useUserStore';
 import { useThemeStore } from './store/useThemeStore';
 
@@ -52,6 +55,9 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<ProfileEditPage />} />
             <Route path="profile/password" element={<ChangePasswordPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="privacy" element={<PrivacyPage />} />
           </Route>
 
           {/* 404 */}

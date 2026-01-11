@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Card, message } from 'antd';
+import { Form, Input, Button, Card, message, Flex, Typography, Layout, theme } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
 import { login as loginApi } from '../../api/auth';
 import { useUserStore } from '../../store/useUserStore';
 import type { LoginRequest } from '../../utils/types';
-import './AuthPages.css';
 
 const LoginPage: React.FC = () => {
+  const { token } = theme.useToken();
   const navigate = useNavigate();
   const { login } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -27,49 +27,51 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="auth-container">
-      <Card className="auth-card" title="登录" bordered={false}>
-        <Form
-          name="login"
-          onFinish={onFinish}
-          autoComplete="on"
-          size="large"
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: '请输入用户名' }]}
+    <Layout style={{ minHeight: '100vh', background: token.colorBgLayout }}>
+      <Flex justify="center" align="center" style={{ minHeight: '100vh', padding: token.padding }}>
+        <Card title="登录" style={{ width: '100%', maxWidth: 450 }}>
+          <Form
+            name="login"
+            onFinish={onFinish}
+            autoComplete="off"
+            size="large"
           >
-            <Input
-              prefix={<UserOutlined />}
-              placeholder="用户名"
-              autoComplete="username"
-            />
-          </Form.Item>
+            <Form.Item
+              name="username"
+              rules={[{ required: true, message: '请输入用户名' }]}
+            >
+              <Input
+                prefix={<UserOutlined />}
+                placeholder="用户名"
+                autoComplete="off"
+              />
+            </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: '请输入密码' }]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="密码"
-              autoComplete="current-password"
-            />
-          </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: '请输入密码' }]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="密码"
+                autoComplete="off"
+              />
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} block>
-              登录
-            </Button>
-          </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" loading={loading} block>
+                登录
+              </Button>
+            </Form.Item>
 
-          <div className="auth-links">
-            <span>还没有账号？</span>
-            <Link to="/register">立即注册</Link>
-          </div>
-        </Form>
-      </Card>
-    </div>
+            <Flex justify="center" gap="small">
+              <Typography.Text>还没有账号？</Typography.Text>
+              <Link to="/register">立即注册</Link>
+            </Flex>
+          </Form>
+        </Card>
+      </Flex>
+    </Layout>
   );
 };
 

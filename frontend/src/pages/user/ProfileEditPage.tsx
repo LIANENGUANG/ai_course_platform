@@ -26,7 +26,7 @@ const ProfileEditPage: React.FC = () => {
     }
   }, [user, form]);
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: UpdateProfileRequest & { birthday?: any }) => {
     try {
       setLoading(true);
       const data: UpdateProfileRequest = {

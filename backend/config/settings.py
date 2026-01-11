@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise (must be after SecurityMiddleware)
     'corsheaders.middleware.CorsMiddleware',  # CORS middleware (must be before CommonMiddleware)
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,7 +73,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'frontend_build'],  # React 前端构建目录
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,10 +158,25 @@ USE_TZ = True
 AUTH_USER_MODEL = 'users.User'
 
 
+# ===========================
 # Static files (CSS, JavaScript, Images)
+# ===========================
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# 前端构建产物目录（仅在生产环境/Docker 中存在）
+FRONTEND_BUILD_DIR = BASE_DIR / 'frontend_build'
+if FRONTEND_BUILD_DIR.exists():
+    STATICFILES_DIRS = [
+        FRONTEND_BUILD_DIR / 'static',
+    ]
+else:
+    STATICFILES_DIRS = []
+
+# WhiteNoise 配置 - 压缩和缓存静态文件
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
