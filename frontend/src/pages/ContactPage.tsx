@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Typography, Space, Descriptions } from 'antd';
-import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const { Title, Paragraph } = Typography;
 
@@ -18,13 +18,13 @@ const ContactPage: React.FC = () => {
 
       <Card title="联系方式">
         <Descriptions column={1}>
-          <Descriptions.Item label={<><MailOutlined /> 邮箱</>}>
+          <Descriptions.Item label={<><Mail size={16} /> 邮箱</>}>
             support@ai-course-platform.com
           </Descriptions.Item>
-          <Descriptions.Item label={<><PhoneOutlined /> 电话</>}>
+          <Descriptions.Item label={<><Phone size={16} /> 电话</>}>
             400-123-4567
           </Descriptions.Item>
-          <Descriptions.Item label={<><EnvironmentOutlined /> 地址</>}>
+          <Descriptions.Item label={<><MapPin size={16} /> 地址</>}>
             北京市海淀区中关村科技园区
           </Descriptions.Item>
         </Descriptions>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Input, Button, message, Space } from 'antd';
-import { LockOutlined } from '@ant-design/icons';
+import { Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { changePassword } from '../../api/auth';
 import type { ChangePasswordRequest } from '../../utils/types';
@@ -48,7 +48,7 @@ const ChangePasswordPage: React.FC = () => {
           rules={[{ required: true, message: '请输入当前密码' }]}
         >
           <Input.Password
-            prefix={<LockOutlined />}
+            prefix={<Lock size={16} />}
             placeholder="请输入当前密码"
           />
         </Form.Item>
@@ -62,7 +62,7 @@ const ChangePasswordPage: React.FC = () => {
           ]}
         >
           <Input.Password
-            prefix={<LockOutlined />}
+            prefix={<Lock size={16} />}
             placeholder="请输入新密码（至少6个字符）"
           />
         </Form.Item>
@@ -84,7 +84,7 @@ const ChangePasswordPage: React.FC = () => {
           ]}
         >
           <Input.Password
-            prefix={<LockOutlined />}
+            prefix={<Lock size={16} />}
             placeholder="请再次输入新密码"
           />
         </Form.Item>

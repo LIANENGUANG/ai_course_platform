@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Card, message, Flex, Typography, Layout, theme } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { User, Lock } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login as loginApi } from '../../api/auth';
 import { useUserStore } from '../../store/useUserStore';
@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
               rules={[{ required: true, message: '请输入用户名' }]}
             >
               <Input
-                prefix={<UserOutlined />}
+                prefix={<User size={16} />}
                 placeholder="用户名"
                 autoComplete="off"
               />
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
               rules={[{ required: true, message: '请输入密码' }]}
             >
               <Input.Password
-                prefix={<LockOutlined />}
+                prefix={<Lock size={16} />}
                 placeholder="密码"
                 autoComplete="off"
               />

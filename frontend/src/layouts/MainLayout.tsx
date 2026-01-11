@@ -2,14 +2,29 @@ import React from 'react';
 import { Layout, Menu, Dropdown, Avatar, Breadcrumb, Switch, Tooltip, theme } from 'antd';
 import type { MenuProps } from 'antd';
 import {
-  HomeOutlined,
-  BookOutlined,
-  UserOutlined,
-  LogoutOutlined,
-  SettingOutlined,
-  BulbOutlined,
-  BulbFilled,
-} from '@ant-design/icons';
+  Home,
+  BookOpen,
+  User,
+  LogOut,
+  Settings,
+  Lightbulb,
+  GraduationCap,
+  Video,
+  Radio,
+  Calendar,
+  History,
+  FileText,
+  ClipboardList,
+  CheckSquare,
+  FileCheck,
+  Trophy,
+  Award,
+  MessageSquare,
+  HelpCircle,
+  Zap,
+  FileType,
+  Download,
+} from 'lucide-react';
 import { useNavigate, useLocation, Outlet, Link } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import { useThemeStore } from '../store/useThemeStore';
@@ -39,81 +54,84 @@ const MainLayout: React.FC = () => {
   const siderMenuItems: MenuProps['items'] = [
     {
       key: '/dashboard',
-      icon: <HomeOutlined />,
+      icon: <Home size={18} />,
       label: '首页',
     },
     {
       key: '/courses',
-      icon: <BookOutlined />,
+      icon: <BookOpen size={18} />,
       label: '我的课程',
     },
     {
       key: 'learning',
-      icon: <BookOutlined />,
+      icon: <GraduationCap size={18} />,
       label: '学习中心',
       children: [
-        { key: '/learning/video', label: '视频课程' },
-        { key: '/learning/live', label: '直播课程' },
-        { key: '/learning/offline', label: '线下课程' },
-        { key: '/learning/history', label: '学习历史' },
-        { key: '/learning/notes', label: '我的笔记' },
+        { key: '/learning/video', icon: <Video size={16} />, label: '视频课程' },
+        { key: '/learning/live', icon: <Radio size={16} />, label: '直播课程' },
+        { key: '/learning/offline', icon: <Calendar size={16} />, label: '线下课程' },
+        { key: '/learning/history', icon: <History size={16} />, label: '学习历史' },
+        { key: '/learning/notes', icon: <FileText size={16} />, label: '我的笔记' },
       ],
     },
     {
       key: 'homework',
-      icon: <BookOutlined />,
+      icon: <ClipboardList size={18} />,
       label: '作业管理',
       children: [
-        { key: '/homework/pending', label: '待完成' },
-        { key: '/homework/submitted', label: '已提交' },
-        { key: '/homework/graded', label: '已批改' },
+        { key: '/homework/pending', icon: <CheckSquare size={16} />, label: '待完成' },
+        { key: '/homework/submitted', icon: <FileCheck size={16} />, label: '已提交' },
+        { key: '/homework/graded', icon: <Award size={16} />, label: '已批改' },
       ],
     },
     {
       key: 'exam',
-      icon: <BookOutlined />,
+      icon: <Trophy size={18} />,
       label: '考试中心',
       children: [
-        { key: '/exam/upcoming', label: '即将开始' },
-        { key: '/exam/history', label: '考试记录' },
-        { key: '/exam/certificate', label: '证书管理' },
+        { key: '/exam/upcoming', icon: <Calendar size={16} />, label: '即将开始' },
+        { key: '/exam/history', icon: <History size={16} />, label: '考试记录' },
+        { key: '/exam/certificate', icon: <Award size={16} />, label: '证书管理' },
       ],
     },
     {
       key: 'community',
-      icon: <BookOutlined />,
+      icon: <MessageSquare size={18} />,
       label: '社区交流',
       children: [
-        { key: '/community/discussion', label: '讨论区' },
-        { key: '/community/qa', label: '问答' },
-        { key: '/community/activities', label: '活动' },
+        { key: '/community/discussion', icon: <MessageSquare size={16} />, label: '讨论区' },
+        { key: '/community/qa', icon: <HelpCircle size={16} />, label: '问答' },
+        { key: '/community/activities', icon: <Zap size={16} />, label: '活动' },
       ],
     },
     {
       key: 'resources',
-      icon: <BookOutlined />,
+      icon: <FileType size={18} />,
       label: '资源库',
       children: [
-        { key: '/resources/documents', label: '文档资料' },
-        { key: '/resources/videos', label: '视频资源' },
-        { key: '/resources/downloads', label: '下载中心' },
+        { key: '/resources/documents', icon: <FileText size={16} />, label: '文档资料' },
+        { key: '/resources/videos', icon: <Video size={16} />, label: '视频资源' },
+        { key: '/resources/downloads', icon: <Download size={16} />, label: '下载中心' },
       ],
     },
     {
       key: 'user',
-      icon: <UserOutlined />,
+      icon: <User size={18} />,
       label: '个人中心',
       children: [
         {
           key: '/profile',
+          icon: <User size={16} />,
           label: '个人信息',
         },
         {
           key: '/profile/edit',
+          icon: <Settings size={16} />,
           label: '编辑资料',
         },
         {
           key: '/profile/password',
+          icon: <Settings size={16} />,
           label: '修改密码',
         },
       ],
@@ -124,13 +142,13 @@ const MainLayout: React.FC = () => {
   const userMenuItems: MenuProps['items'] = [
     {
       key: 'profile',
-      icon: <UserOutlined />,
+      icon: <User size={16} />,
       label: '个人信息',
       onClick: () => navigate('/profile'),
     },
     {
       key: 'settings',
-      icon: <SettingOutlined />,
+      icon: <Settings size={16} />,
       label: '账号设置',
       onClick: () => navigate('/profile/edit'),
     },
@@ -139,7 +157,7 @@ const MainLayout: React.FC = () => {
     },
     {
       key: 'logout',
-      icon: <LogoutOutlined />,
+      icon: <LogOut size={16} />,
       label: '退出登录',
       onClick: async () => {
         await logout();
@@ -219,15 +237,15 @@ const MainLayout: React.FC = () => {
             <Switch
               checked={mode === 'dark'}
               onChange={toggleTheme}
-              checkedChildren={<BulbFilled />}
-              unCheckedChildren={<BulbOutlined />}
+              checkedChildren={<Lightbulb size={14} />}
+              unCheckedChildren={<Lightbulb size={14} />}
             />
           </Tooltip>
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
             <div style={{ display: 'flex', alignItems: 'center', gap: token.marginXS, cursor: 'pointer' }}>
               <Avatar
                 src={user?.profile.avatar}
-                icon={!user?.profile.avatar && <UserOutlined />}
+                icon={!user?.profile.avatar && <User size={16} />}
                 size="default"
               />
               <span>{user?.profile.nickname || user?.username}</span>

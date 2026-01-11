@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Descriptions, Tag, Button, Space, message } from 'antd';
-import { UserOutlined, EditOutlined, LockOutlined } from '@ant-design/icons';
+import { User as UserIcon, Edit, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../store/useUserStore';
 import { getCurrentUser } from '../../api/auth';
@@ -68,7 +68,7 @@ const ProfilePage: React.FC = () => {
           <Avatar
             size={120}
             src={user.profile.avatar}
-            icon={!user.profile.avatar && <UserOutlined />}
+            icon={!user.profile.avatar && <UserIcon size={48} />}
           />
           <Space direction="vertical">
             <Space direction="vertical" size="small">
@@ -83,13 +83,13 @@ const ProfilePage: React.FC = () => {
             <Space>
               <Button
                 type="primary"
-                icon={<EditOutlined />}
+                icon={<Edit size={16} />}
                 onClick={() => navigate('/profile/edit')}
               >
                 编辑资料
               </Button>
               <Button
-                icon={<LockOutlined />}
+                icon={<Lock size={16} />}
                 onClick={() => navigate('/profile/password')}
               >
                 修改密码

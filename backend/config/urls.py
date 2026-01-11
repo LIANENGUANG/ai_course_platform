@@ -15,7 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
+from django.conf import settings
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -35,3 +37,12 @@ urlpatterns = [
     # API Routes
     path('api/', include('apps.users.urls')),
 ]
+
+# 生产环境：服务前端 React 应用
+# 所有非 API/admin 路由返回 index.html（支持 React Router）
+if settings.FRONTEND_BUILD_DIR.exists():
+    urlpatterns += [
+        re_path(r'^(?!api|admin|static|media).*$',
+                TemplateView.as_view(template_name='index.html'),
+                name='frontend'),
+    ]

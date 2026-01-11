@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Statistic, Typography, Space } from 'antd';
-import { BookOutlined, UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { BookOpen, User, CheckCircle } from 'lucide-react';
 
 const { Title } = Typography;
 
@@ -14,7 +14,7 @@ const DashboardPage: React.FC = () => {
             <Statistic
               title="我的课程"
               value={0}
-              prefix={<BookOutlined />}
+              prefix={<BookOpen size={20} />}
               suffix="门"
             />
           </Card>
@@ -24,7 +24,7 @@ const DashboardPage: React.FC = () => {
             <Statistic
               title="学习时长"
               value={0}
-              prefix={<CheckCircleOutlined />}
+              prefix={<CheckCircle size={20} />}
               suffix="小时"
             />
           </Card>
@@ -34,7 +34,7 @@ const DashboardPage: React.FC = () => {
             <Statistic
               title="完成课程"
               value={0}
-              prefix={<UserOutlined />}
+              prefix={<User size={20} />}
               suffix="门"
             />
           </Card>
