@@ -235,7 +235,6 @@ const MainLayout: React.FC = () => {
           onClick={() => navigate('/dashboard')}
           style={{
             height: token.sizeLG,
-            maxWidth: 200,
             marginRight: token.marginLG,
             cursor: 'pointer',
             userSelect: 'none',
@@ -244,7 +243,7 @@ const MainLayout: React.FC = () => {
         <Input
           placeholder="搜索课程、资源..."
           prefix={<Search size={token.fontSizeLG} />}
-          style={{ width: 200, marginRight: token.marginLG }}
+          style={{ width: 250, marginRight: token.marginLG }}
           allowClear
         />
         <div style={{ flex: 1 }} />
