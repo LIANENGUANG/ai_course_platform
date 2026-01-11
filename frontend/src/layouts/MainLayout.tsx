@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Dropdown, Avatar, Breadcrumb, Switch, Tooltip, theme } from 'antd';
+import { Layout, Menu, Dropdown, Avatar, Breadcrumb, theme } from 'antd';
 import type { MenuProps } from 'antd';
 import {
   Home,
@@ -7,7 +7,8 @@ import {
   User,
   LogOut,
   Settings,
-  Lightbulb,
+  Sun,
+  Moon,
   GraduationCap,
   Video,
   Radio,
@@ -233,14 +234,30 @@ const MainLayout: React.FC = () => {
           style={{ flex: 1, minWidth: 0 }}
         />
         <div style={{ display: 'flex', alignItems: 'center', gap: token.margin }}>
-          <Tooltip title={mode === 'dark' ? '切换到浅色模式' : '切换到深色模式'}>
-            <Switch
-              checked={mode === 'dark'}
-              onChange={toggleTheme}
-              checkedChildren={<Lightbulb size={14} />}
-              unCheckedChildren={<Lightbulb size={14} />}
-            />
-          </Tooltip>
+          <div
+            onClick={toggleTheme}
+            style={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: token.paddingXS,
+              borderRadius: token.borderRadius,
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = token.colorBgTextHover;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            {mode === 'dark' ? (
+              <Sun size={20} strokeWidth={2} />
+            ) : (
+              <Moon size={20} strokeWidth={2} />
+            )}
+          </div>
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
             <div style={{ display: 'flex', alignItems: 'center', gap: token.marginXS, cursor: 'pointer' }}>
               <Avatar
