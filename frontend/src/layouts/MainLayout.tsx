@@ -231,15 +231,16 @@ const MainLayout: React.FC = () => {
         <Input
           placeholder="搜索课程、资源..."
           prefix={<Search size={16} />}
-          style={{ width: 300 }}
+          style={{ width: 250, marginRight: token.marginLG }}
           allowClear
         />
+        <div style={{ flex: 1 }} />
         <Menu
           mode="horizontal"
           selectedKeys={[]}
           items={headerMenuItems}
           onClick={handleMenuClick}
-          style={{ marginLeft: 'auto', borderBottom: 'none' }}
+          style={{ borderBottom: 'none', minWidth: 0 }}
         />
         <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: token.marginLG }}>
           <div
