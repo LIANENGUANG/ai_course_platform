@@ -42,6 +42,11 @@ const MainLayout: React.FC = () => {
   // Header 菜单项
   const headerMenuItems: MenuProps['items'] = [
     {
+      key: '/dashboard',
+      label: '首页',
+      title: 'AI 智能助手',
+    },
+    {
       key: '/teaching-system',
       label: '教学系统',
     },
