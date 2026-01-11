@@ -48,31 +48,31 @@ const MainLayout: React.FC = () => {
       icon: <Home size={token.fontSizeLG} />,
       label: '首页',
       title: 'AI 智能助手',
-      style: { padding: `0 ${token.paddingSM}px` },
+      style: { padding: `0 ${token.paddingXS}px` },
     },
     {
       key: '/teaching-system',
       icon: <GraduationCap size={token.fontSizeLG} />,
       label: '教学系统',
-      style: { padding: `0 ${token.paddingSM}px` },
+      style: { padding: `0 ${token.paddingXS}px` },
     },
     {
       key: '/support',
       icon: <MessageSquare size={token.fontSizeLG} />,
       label: '客服支持',
-      style: { padding: `0 ${token.paddingSM}px` },
+      style: { padding: `0 ${token.paddingXS}px` },
     },
     {
       key: '/trial',
       icon: <Zap size={token.fontSizeLG} />,
       label: '试用',
-      style: { padding: `0 ${token.paddingSM}px` },
+      style: { padding: `0 ${token.paddingXS}px` },
     },
     {
       key: '/pricing',
       icon: <DollarSign size={token.fontSizeLG} />,
       label: '定价',
-      style: { padding: `0 ${token.paddingSM}px` },
+      style: { padding: `0 ${token.paddingXS}px` },
     },
   ];
 
@@ -235,6 +235,7 @@ const MainLayout: React.FC = () => {
           onClick={() => navigate('/dashboard')}
           style={{
             height: token.sizeLG,
+            maxWidth: 200,
             marginRight: token.marginLG,
             cursor: 'pointer',
             userSelect: 'none',
@@ -243,7 +244,7 @@ const MainLayout: React.FC = () => {
         <Input
           placeholder="搜索课程、资源..."
           prefix={<Search size={token.fontSizeLG} />}
-          style={{ width: 250, marginRight: token.marginLG }}
+          style={{ width: 200, marginRight: token.marginLG }}
           allowClear
         />
         <div style={{ flex: 1 }} />
