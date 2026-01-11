@@ -212,32 +212,31 @@ const MainLayout: React.FC = () => {
           padding: `0 ${token.paddingLG}px`,
         }}
       >
-        <div
+        <img
+          src="/logo.svg"
+          alt="菁语 EduSmart AI"
           onClick={() => navigate('/dashboard')}
           style={{
+            height: 40,
             marginRight: token.marginLG,
-            fontSize: token.fontSizeLG,
-            fontWeight: 'bold',
             cursor: 'pointer',
             userSelect: 'none',
           }}
-        >
-          AI 课程平台
-        </div>
+        />
+        <Input
+          placeholder="搜索课程、资源..."
+          prefix={<Search size={16} />}
+          style={{ width: 300 }}
+          allowClear
+        />
         <Menu
           mode="horizontal"
           selectedKeys={[]}
           items={headerMenuItems}
           onClick={handleMenuClick}
-          style={{ flex: 1, minWidth: 0, borderBottom: 'none' }}
+          style={{ marginLeft: 'auto', borderBottom: 'none' }}
         />
-        <Input
-          placeholder="搜索课程、资源..."
-          prefix={<Search size={16} />}
-          style={{ maxWidth: 400, marginRight: token.marginLG }}
-          allowClear
-        />
-        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: token.margin, marginLeft: token.marginLG }}>
           <div
             onClick={toggleTheme}
             style={{
